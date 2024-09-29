@@ -148,7 +148,7 @@
 \vfill
 
 \begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
-10 numbers, between 1 and 100, without repetition :
+10 numbers, between 1 and 100, without repetition:
 
 \hfill\randintlist[min=1,max=100,nb=10]{\mylist}\textcolor{red}{\mylist}\hfill~
 
@@ -158,7 +158,7 @@ The 5th value is :
 \end{tcolorbox}
 
 \begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
-15 numbers, between 1 and 20, with repetition :
+15 numbers, between 1 and 20, with repetition:
 
 \hfill\randintlist[min=1,max=20,nb=15,repeat]{\mylist}\textcolor{red}{\mylist}\hfill~
 
@@ -168,11 +168,11 @@ The last value is :
 \end{tcolorbox}
 
 \begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
-6 sorted numbers, between 1 and 51, without repetition :
+6 sorted numbers, between 1 and 51, without repetition:
 
-\hfill\randintlist[min=1,max=51,nb=6,sort=asc]{\mylist}ascending : \textcolor{red}{\mylist}\hfill~
+\hfill\randintlist[min=1,max=51,nb=6,sort=asc]{\mylist}ascending: \textcolor{red}{\mylist}\hfill~
 
-\hfill\randintlist[min=1,max=51,nb=6,sort=des,sep=>]{\mylist}descending : \textcolor{red}{\mylist}\hfill~
+\hfill\randintlist[min=1,max=51,nb=6,sort=des,sep=>]{\mylist}descending: \textcolor{red}{\mylist}\hfill~
 \end{tcolorbox}
 
 \vfill~
@@ -207,13 +207,13 @@ The last value is :
 
 \section{Loading, useful packages}
 
-In order to load \texttt{randintlist}, simply use :
+In order to load \texttt{randintlist}, simply use:
 
 \begin{DemoCode}{listing only}
 \usepackage{randintlist}
 \end{DemoCode}
 
-Loaded packages are \texttt{simplekv}, \texttt{listofitems}, \texttt{randomlist},  \texttt{xintexpr} and \texttt{xstring}
+Loaded packages are \texttt{simplekv}, \texttt{listofitems}, \texttt{randomlist},  \texttt{xintexpr} and \texttt{xstring}.
 
 \section{The Macros}
 
@@ -230,16 +230,16 @@ Package \texttt{randintlist} supports the creation of random integer number list
 \randintlist[keys]{\macro}
 \end{DemoCode}
 
-Available keys are :
+Available keys are:
 
 \begin{itemize}
-	\item \ShowCode{min} : minimum value (default \ShowCode{1}) ;
-	\item \ShowCode{max} : maximum value (default \ShowCode{50}) ;
-	\item \ShowCode{nb} : number of values (default \ShowCode{6}) ;
-	\item \ShowCode{sep} : separator for the list (default \ShowCode{,}) ;
-	\item \ShowCode{sort} : sorting options, within \ShowCode{no/asc/dec} (default \ShowCode{no}) ;
-	\item \ShowCode{repeat} : boolean to authorize repeating values (default \ShowCode{false}) ;
-	\item \ShowCode{seed} : random seed value according to used packages (default \ShowCode{-}).
+	\item \ShowCode{min}: minimum value (default \ShowCode{1});
+	\item \ShowCode{max}: maximum value (default \ShowCode{50});
+	\item \ShowCode{nb}: number of values (default \ShowCode{6});
+	\item \ShowCode{sep}: separator for the list (default \ShowCode{,});
+	\item \ShowCode{sort}: sorting options, within \ShowCode{no/asc/dec} (default \ShowCode{no});
+	\item \ShowCode{repeat}: boolean to authorize repeating values (default \ShowCode{false});
+	\item \ShowCode{seed}: random seed value according to used packages (default \ShowCode{-}).
 \end{itemize}
 
 \begin{DemoCode}{}
@@ -261,7 +261,7 @@ Available keys are :
 %list used with listofitems
 \randintlist{\mylistD}\mylistD\par
 \readlist*\mylistused{\mylistD}\showitems{\mylistused}\par
-\mylistused[1] ; \mylistused[-1]
+\mylistused[1]; \mylistused[-1]
 \end{DemoCode}
 
 \subsection{Accessing elements}
@@ -273,8 +273,8 @@ Available keys are :
 
 \begin{DemoCode}{}
 %with default keys
-\randintlist{\mylistE}raw list : \mylistE\par
-items list :\par
+\randintlist{\mylistE}raw list: \mylistE\par
+items list:\par
 \xintFor* #1 in {\xintSeq{1}{6}}\do{\getitemfromrandintlist{\mylistE}{#1}\par}
 \getitemfromrandintlist{\mylistE}{1}
 \end{DemoCode}
@@ -322,7 +322,7 @@ The following example uses \TikZ, and comes from \texttt{luarandom}'s documentat
 
 \section{History}
 
-\texttt{0.1.0 : Initial version}
+\texttt{0.1.0: Initial version}
 
 \section{The code}
 
