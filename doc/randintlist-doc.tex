@@ -27,8 +27,8 @@
 \hypersetup{pdfborder=0 0 0}
 \usepackage[margin=2cm]{geometry}
 \setlength{\parindent}{0pt}
-\def\TPversion{0.1.0}
-\def\TPdate{23/09/2024}
+\def\TPversion{0.1.1}
+\def\TPdate{24/09/2024}
 \usepackage{tcolorbox}
 \usepackage{pgffor}
 \tcbuselibrary{breakable,skins,hooks,listingsutf8}
@@ -52,7 +52,7 @@
 	morekeywords={\randintlist,\getitemfromrandintlist},%
 	keywordstyle={\color{green!50!black}},%
 	classoffset=3,%
-	morekeywords={min,max,nb,seed,sort,sep,repeat},%
+	morekeywords={min,max,nb,seed,sort,sep,repeat,exclude},%
 	keywordstyle={\color{orange}}
 }
 
@@ -82,7 +82,7 @@
 		morekeywords={\randintlist,\getitemfromrandintlist,\ListeRandint,\ExtraireEltListeRandint},%
 		keywordstyle={\color{green!50!black}},%
 		classoffset=3,%
-		morekeywords={min,max,nb,seed,sort,sep,repeat,Min,Max,Nb,Graine,Sep,Tri,Repet},%
+		morekeywords={min,max,nb,seed,sort,sep,repeat,Min,Max,Nb,Graine,Sep,Tri,Repet,exclude,Exclure},%
 		keywordstyle={\color{orange}}
 	},%
 	#1
@@ -101,7 +101,7 @@
 		basicstyle=\scriptsize\ttfamily,%
 		tabsize=4,%
 		commentstyle={\itshape\color{gray}},%
-		lastline=113
+		lastline=148
 	},%
 	breakable,
 	listing only,%
@@ -152,9 +152,19 @@
 
 \hfill\randintlist[min=1,max=100,nb=10]{\mylist}\textcolor{red}{\mylist}\hfill~
 
-The 5th value is :
+The 5th value is:
 
 \hfill\textcolor{blue}{\getitemfromrandintlist{\mylist}{5}}\hfill~
+\end{tcolorbox}
+
+\begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
+10 numbers, between 1 and 100, without multiples of 5:
+
+\hfill\randintlist[min=1,max=100,nb=10,exclude={5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100}]{\mylist}\textcolor{olive}{\mylist}\hfill~
+
+The 9th value is:
+
+\hfill\textcolor{purple}{\getitemfromrandintlist{\mylist}{9}}\hfill~
 \end{tcolorbox}
 
 \begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
@@ -162,7 +172,7 @@ The 5th value is :
 
 \hfill\randintlist[min=1,max=20,nb=15,repeat]{\mylist}\textcolor{red}{\mylist}\hfill~
 
-The last value is :
+The last value is:
 
 \hfill\textcolor{blue}{\getitemfromrandintlist{\mylist}{-1}}\hfill~
 \end{tcolorbox}
@@ -170,9 +180,9 @@ The last value is :
 \begin{tcolorbox}[colframe=lightgray,colback=lightgray!5]
 6 sorted numbers, between 1 and 51, without repetition:
 
-\hfill\randintlist[min=1,max=51,nb=6,sort=asc]{\mylist}ascending: \textcolor{red}{\mylist}\hfill~
+\hfill\randintlist[min=1,max=51,nb=6,sort=asc]{\mylist}ascending : \textcolor{red}{\mylist}\hfill~
 
-\hfill\randintlist[min=1,max=51,nb=6,sort=des,sep=>]{\mylist}descending: \textcolor{red}{\mylist}\hfill~
+\hfill\randintlist[min=1,max=51,nb=6,sort=des,sep=>]{\mylist}descending : \textcolor{red}{\mylist}\hfill~
 \end{tcolorbox}
 
 \vfill~
@@ -213,7 +223,7 @@ In order to load \texttt{randintlist}, simply use:
 \usepackage{randintlist}
 \end{DemoCode}
 
-Loaded packages are \texttt{simplekv}, \texttt{listofitems}, \texttt{randomlist},  \texttt{xintexpr} and \texttt{xstring}.
+Loaded packages are \texttt{ifthen}, \texttt{simplekv}, \texttt{listofitems}, \texttt{randomlist},  \texttt{xintexpr} and \texttt{xstring}.
 
 \section{The Macros}
 
@@ -239,6 +249,7 @@ Available keys are:
 	\item \ShowCode{sep}: separator for the list (default \ShowCode{,});
 	\item \ShowCode{sort}: sorting options, within \ShowCode{no/asc/dec} (default \ShowCode{no});
 	\item \ShowCode{repeat}: boolean to authorize repeating values (default \ShowCode{false});
+	\item \ShowCode{exclude}: list of excluded values (default \ShowCode{empty});
 	\item \ShowCode{seed}: random seed value according to used packages (default \ShowCode{-}).
 \end{itemize}
 
@@ -255,6 +266,14 @@ Available keys are:
 \begin{DemoCode}{}
 %15 between 1 and 50, with ascending and repetitions allowed
 \randintlist[sort=asc,min=1,max=50,nb=15,repeat]{\mylistC}\mylistC
+\end{DemoCode}
+
+\begin{DemoCode}{}
+%15 between 1 and 50, without multiples of 5
+\randintlist[%
+	sort=asc,min=1,max=50,nb=15,repeat,%
+	exclude={5,10,15,20,25,30,35,40,45,50}]%
+	{\mylistC}\mylistC
 \end{DemoCode}
 
 \begin{DemoCode}{}
@@ -276,7 +295,7 @@ Available keys are:
 \randintlist{\mylistE}raw list: \mylistE\par
 items list:\par
 \xintFor* #1 in {\xintSeq{1}{6}}\do{\getitemfromrandintlist{\mylistE}{#1}\par}
-\getitemfromrandintlist{\mylistE}{1}
+first element: \getitemfromrandintlist{\mylistE}{1}
 \end{DemoCode}
 
 \subsection{Version française}
@@ -285,7 +304,7 @@ Voilà les commandes en version française, la syntaxe et les clés ne seront pa
 
 \begin{DemoCode}{listing only}
 %obtenir la liste
-\ListeRandint[Min=...,Max=...,Nb=...,Repet=...,Graine=...,Tri=...,Sep=...]{\macro}
+\ListeRandint[Min=..,Max=..,Nb=..,Repet=..,Graine=..,Tri=..,Sep=..,Exclure=..]{\macro}
 
 %extraire un élément
 \ExtraireEltListeRandint[sep]{\macro}{position}
@@ -293,8 +312,7 @@ Voilà les commandes en version française, la syntaxe et les clés ne seront pa
 
 \begin{DemoCode}{}
 %liste
-\ListeRandint[Min=5,Max=15,Nb=7,Repet,Tri=croiss,Sep={/}]{\maliste}\maliste
-
+\ListeRandint[Min=5,Max=15,Nb=7,Repet,Tri=croiss,Sep={/}]{\maliste}\maliste\\
 %élément
 \ExtraireEltListeRandint[/]{\maliste}{4}
 \end{DemoCode}
@@ -321,6 +339,8 @@ The following example uses \TikZ, and comes from \texttt{luarandom}'s documentat
 \pagebreak
 
 \section{History}
+
+\texttt{0.1.1: Possibility to exclude values}
 
 \texttt{0.1.0: Initial version}
 
